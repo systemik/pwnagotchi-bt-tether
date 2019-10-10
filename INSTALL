@@ -1,0 +1,43 @@
+export PWNTETHER=C0:BD:C8:D0:7B:8C
+git clone https://github.com/bablokb/pi-btnap.git
+sudo apt-get install expect
+sudo pi-btnap/tools/install-btnap client
+
+cat <<- EOFF > /home/pi/bluetooth-pair.sh
+#!/usr/bin/expect -f
+
+set prompt "#"
+set address [lindex \$argv 0]
+
+spawn bluetoothctl
+expect -re \$prompt
+send "remove \$address\r"
+sleep 1
+expect -re \$prompt
+send "scan on\r"
+send_user "\nSleeping\r"
+sleep 10
+send_user "\nDone sleeping\r"
+send "scan off\r"
+expect "Controller"
+send "trust \$address\r"
+sleep 2
+send "pair \$address\r"
+sleep 2
+expect "Confirm passkey"
+send "yes\r"
+sleep 3
+send_user "\nShould be paired now.\r"
+send "quit\r"
+expect eof
+
+EOFF
+chmod +x /home/pi/bluetooth-pair.sh
+sudo /home/pi/bluetooth-pair.sh $PWNTETHER
+sudo systemctl start btnap
+sleep 5
+sudo ifconfig bnep0 192.168.44.100 netmask 255.255.255.0
+sudo sed -i "s@127.0.0.1@8.8.8.8@g" /etc/resolv.conf
+sudo sed -i "s@REMOTE_DEV=\"\"@REMOTE_DEV=\"$PWNTETHER\"@g" /etc/btnap.conf
+sudo route del -net 0.0.0.0 netmask 0.0.0.0 gw 10.0.0.1
+sudo route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.44.1
