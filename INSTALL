@@ -1,6 +1,7 @@
 export PWNTETHER=C0:BD:C8:D0:7B:8C
+sudo apt-get -y install expect
 git clone https://github.com/bablokb/pi-btnap.git
-sudo apt-get install expect
+
 sudo pi-btnap/tools/install-btnap client
 
 cat <<- EOFF > /home/pi/bluetooth-pair.sh
@@ -34,7 +35,7 @@ expect eof
 EOFF
 chmod +x /home/pi/bluetooth-pair.sh
 sudo /home/pi/bluetooth-pair.sh $PWNTETHER
-sudo systemctl start btnap
+sudo systemctl restart btnap
 sleep 5
 sudo ifconfig bnep0 192.168.44.100 netmask 255.255.255.0
 sudo sed -i "s@127.0.0.1@8.8.8.8@g" /etc/resolv.conf
