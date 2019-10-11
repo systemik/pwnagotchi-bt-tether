@@ -281,3 +281,48 @@ default         192.168.44.1    0.0.0.0         UG    0      0        0 bnep0
 10.0.0.0        0.0.0.0         255.255.255.0   U     0      0        0 usb0
 192.168.44.0    0.0.0.0         255.255.255.0   U     0      0        0 bnep0
 
+
+pi@pwnagotchi:~ $ ifconfig
+bnep0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.44.100  netmask 255.255.255.0  broadcast 192.168.44.255
+        inet6 fe80::ba27:ebff:fe2e:6eef  prefixlen 64  scopeid 0x20<link>
+        ether b8:27:eb:2e:6e:ef  txqueuelen 1000  (Ethernet)
+        RX packets 4778  bytes 346542 (338.4 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 7026  bytes 417946 (408.1 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 5456  bytes 327496 (319.8 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 5456  bytes 327496 (319.8 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+mon0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        unspec B8-27-EB-D1-91-10-30-30-00-00-00-00-00-00-00-00  txqueuelen 1000  (UNSPEC)
+        RX packets 32877  bytes 4821401 (4.5 MiB)
+        RX errors 0  dropped 32877  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+usb0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.0.2  netmask 255.255.255.0  broadcast 10.0.0.255
+        inet6 fe80::a8ca:3aff:feb6:d3f8  prefixlen 64  scopeid 0x20<link>
+        ether aa:ca:3a:b6:d3:f8  txqueuelen 1000  (Ethernet)
+        RX packets 14658  bytes 16552712 (15.7 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 5166  bytes 501638 (489.8 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+pi@pwnagotchi:~ $ ping www.google.com
+PING www.google.com (172.217.168.4) 56(84) bytes of data.
+64 bytes from zrh11s03-in-f4.1e100.net (172.217.168.4): icmp_seq=1 ttl=53 time=60.2 ms
+64 bytes from zrh11s03-in-f4.1e100.net (172.217.168.4): icmp_seq=2 ttl=53 time=66.6 ms
+^C
+--- www.google.com ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 2ms
+rtt min/avg/max/mdev = 60.193/63.411/66.629/3.218 ms
+pi@pwnagotchi:~ $
