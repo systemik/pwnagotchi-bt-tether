@@ -326,3 +326,25 @@ PING www.google.com (172.217.168.4) 56(84) bytes of data.
 2 packets transmitted, 2 received, 0% packet loss, time 2ms
 rtt min/avg/max/mdev = 60.193/63.411/66.629/3.218 ms
 pi@pwnagotchi:~ $
+
+
+
+
+If you want to automate :
+
+pi@pwnagotchi:~ $ crontab -e
+no crontab for pi - using an empty one
+
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.basic
+  3. /usr/bin/vim.tiny
+  4. /bin/ed
+
+Choose 1-4 [1]:1
+
+Add :
+* * * * * /home/pi/tether-restart.sh
+and save with ctrl+o and ctrl+x.
+
+Unplug usb0, retart pwnagotchi and it should connect to bluetooth on next boot
