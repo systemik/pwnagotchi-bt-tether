@@ -1,0 +1,283 @@
+Expected output on RC2
+
+
+systemic$ ssh pi@10.0.0.2
+The authenticity of host '10.0.0.2 (10.0.0.2)' can't be established.
+ECDSA key fingerprint is SHA256:Wv1gCsFdPFISWC4U1BCYlyW14xuUxPDzMcGr73yU1s4.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '10.0.0.2' (ECDSA) to the list of known hosts.
+pi@10.0.0.2's password:
+Linux pwnagotchi 4.19.66-Re4son+ #1 Sun Aug 18 13:42:02 AEST 2019 armv6l
+(◕‿‿◕) pwnagotchi (pwnagotchi-v1.0.0RC2)
+
+SSH is enabled and the default password for the 'pi' user has not been changed.
+This is a security risk - please login as the 'pi' user and type 'passwd' to set a new password.
+
+pi@pwnagotchi:~ $ export PWNTETHER=C0:BD:C8:D0:7B:8C
+
+pi@pwnagotchi:~ $ sudo apt-get -y install expect
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  libtcl8.6 tcl-expect tcl8.6
+Suggested packages:
+  tk8.6 tcl-tclreadline
+The following NEW packages will be installed:
+  expect libtcl8.6 tcl-expect tcl8.6
+0 upgraded, 4 newly installed, 0 to remove and 0 not upgraded.
+Need to get 1287 kB of archives.
+After this operation, 4655 kB of additional disk space will be used.
+Get:1 http://debian.anexia.at/raspbian/raspbian buster/main armhf libtcl8.6 armhf 8.6.9+dfsg-2 [878 kB]
+Get:2 http://debian.anexia.at/raspbian/raspbian buster/main armhf tcl8.6 armhf 8.6.9+dfsg-2 [123 kB]
+Get:3 http://debian.anexia.at/raspbian/raspbian buster/main armhf tcl-expect armhf 5.45.4-2 [121 kB]
+Get:4 http://debian.anexia.at/raspbian/raspbian buster/main armhf expect armhf 5.45.4-2 [166 kB]
+Fetched 1287 kB in 1s (1173 kB/s)
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LANGUAGE = (unset),
+	LC_ALL = (unset),
+	LC_CTYPE = "UTF-8",
+	LANG = "en_GB.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to a fallback locale ("en_GB.UTF-8").
+locale: Cannot set LC_CTYPE to default locale: No such file or directory
+locale: Cannot set LC_ALL to default locale: No such file or directory
+Selecting previously unselected package libtcl8.6:armhf.
+(Reading database ... 82555 files and directories currently installed.)
+Preparing to unpack .../libtcl8.6_8.6.9+dfsg-2_armhf.deb ...
+Unpacking libtcl8.6:armhf (8.6.9+dfsg-2) ...
+Selecting previously unselected package tcl8.6.
+Preparing to unpack .../tcl8.6_8.6.9+dfsg-2_armhf.deb ...
+Unpacking tcl8.6 (8.6.9+dfsg-2) ...
+Selecting previously unselected package tcl-expect:armhf.
+Preparing to unpack .../tcl-expect_5.45.4-2_armhf.deb ...
+Unpacking tcl-expect:armhf (5.45.4-2) ...
+Selecting previously unselected package expect.
+Preparing to unpack .../expect_5.45.4-2_armhf.deb ...
+Unpacking expect (5.45.4-2) ...
+Setting up libtcl8.6:armhf (8.6.9+dfsg-2) ...
+Setting up tcl8.6 (8.6.9+dfsg-2) ...
+Setting up tcl-expect:armhf (5.45.4-2) ...
+Setting up expect (5.45.4-2) ...
+Processing triggers for man-db (2.8.5-2) ...
+Processing triggers for libc-bin (2.28-10+rpi1) ...
+
+pi@pwnagotchi:~ $ git clone https://github.com/bablokb/pi-btnap.git
+Cloning into 'pi-btnap'...
+remote: Enumerating objects: 84, done.
+remote: Total 84 (delta 0), reused 0 (delta 0), pack-reused 84
+Unpacking objects: 100% (84/84), done.
+pi@pwnagotchi:~ $
+pi@pwnagotchi:~ $ sudo pi-btnap/tools/install-btnap client
+Get:1 http://archive.raspberrypi.org/debian buster InRelease [25.1 kB]
+Get:2 http://raspbian.raspberrypi.org/raspbian buster InRelease [15.0 kB]
+Hit:3 http://http.re4son-kernel.com/re4son kali-pi InRelease
+Get:4 http://raspbian.raspberrypi.org/raspbian buster/main armhf Packages [13.0 MB]
+Get:5 http://archive.raspberrypi.org/debian buster/main armhf Packages [259 kB]
+Fetched 13.3 MB in 29s (463 kB/s)
+Reading package lists... Done
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  dns-root-data dnsmasq-base python-gi python-gobject-2
+Suggested packages:
+  python-dbus-dbg python-dbus-doc python-gi-cairo python-gobject-2-dbg
+The following NEW packages will be installed:
+  bridge-utils dns-root-data dnsmasq dnsmasq-base python-dbus python-gi python-gobject python-gobject-2
+0 upgraded, 8 newly installed, 0 to remove and 9 not upgraded.
+Need to get 1036 kB of archives.
+After this operation, 2833 kB of additional disk space will be used.
+Get:1 http://archive.raspberrypi.org/debian buster/main armhf dnsmasq-base armhf 2.80-1+rpt1 [400 kB]
+Get:4 http://archive.raspberrypi.org/debian buster/main armhf dnsmasq all 2.80-1+rpt1 [16.5 kB]
+Get:2 http://debian.anexia.at/raspbian/raspbian buster/main armhf bridge-utils armhf 1.6-2 [32.8 kB]
+Get:3 http://debian.anexia.at/raspbian/raspbian buster/main armhf dns-root-data all 2019031302 [5396 B]
+Get:5 http://debian.anexia.at/raspbian/raspbian buster/main armhf python-dbus armhf 1.2.8-3 [95.7 kB]
+Get:6 http://debian.anexia.at/raspbian/raspbian buster/main armhf python-gi armhf 3.30.4-1 [208 kB]
+Get:7 http://debian.anexia.at/raspbian/raspbian buster/main armhf python-gobject-2 armhf 2.28.6-13 [258 kB]
+Get:8 http://debian.anexia.at/raspbian/raspbian buster/main armhf python-gobject all 3.30.4-1 [20.0 kB]
+Fetched 1036 kB in 1s (769 kB/s)
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LANGUAGE = (unset),
+	LC_ALL = (unset),
+	LC_CTYPE = "UTF-8",
+	LANG = "en_GB.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to a fallback locale ("en_GB.UTF-8").
+locale: Cannot set LC_CTYPE to default locale: No such file or directory
+locale: Cannot set LC_ALL to default locale: No such file or directory
+Selecting previously unselected package bridge-utils.
+(Reading database ... 82888 files and directories currently installed.)
+Preparing to unpack .../0-bridge-utils_1.6-2_armhf.deb ...
+Unpacking bridge-utils (1.6-2) ...
+Selecting previously unselected package dns-root-data.
+Preparing to unpack .../1-dns-root-data_2019031302_all.deb ...
+Unpacking dns-root-data (2019031302) ...
+Selecting previously unselected package dnsmasq-base.
+Preparing to unpack .../2-dnsmasq-base_2.80-1+rpt1_armhf.deb ...
+Unpacking dnsmasq-base (2.80-1+rpt1) ...
+Selecting previously unselected package dnsmasq.
+Preparing to unpack .../3-dnsmasq_2.80-1+rpt1_all.deb ...
+Unpacking dnsmasq (2.80-1+rpt1) ...
+Selecting previously unselected package python-dbus.
+Preparing to unpack .../4-python-dbus_1.2.8-3_armhf.deb ...
+Unpacking python-dbus (1.2.8-3) ...
+Selecting previously unselected package python-gi.
+Preparing to unpack .../5-python-gi_3.30.4-1_armhf.deb ...
+Unpacking python-gi (3.30.4-1) ...
+Selecting previously unselected package python-gobject-2.
+Preparing to unpack .../6-python-gobject-2_2.28.6-13_armhf.deb ...
+Unpacking python-gobject-2 (2.28.6-13) ...
+Selecting previously unselected package python-gobject.
+Preparing to unpack .../7-python-gobject_3.30.4-1_all.deb ...
+Unpacking python-gobject (3.30.4-1) ...
+Setting up python-gi (3.30.4-1) ...
+Setting up python-gobject-2 (2.28.6-13) ...
+Setting up python-gobject (3.30.4-1) ...
+Setting up dnsmasq-base (2.80-1+rpt1) ...
+Setting up dns-root-data (2019031302) ...
+Setting up dnsmasq (2.80-1+rpt1) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/dnsmasq.service → /lib/systemd/system/dnsmasq.service.
+Setting up python-dbus (1.2.8-3) ...
+Setting up bridge-utils (1.6-2) ...
+locale: Cannot set LC_CTYPE to default locale: No such file or directory
+locale: Cannot set LC_ALL to default locale: No such file or directory
+Processing triggers for systemd (241-7~deb10u1+rpi1) ...
+Processing triggers for man-db (2.8.5-2) ...
+Processing triggers for dbus (1.12.16-1) ...
+Processing triggers for libc-bin (2.28-10+rpi1) ...
+Created symlink /etc/systemd/system/bluetooth.target.wants/btnap.service → /etc/systemd/system/btnap.service.
+please edit /etc/btnap.conf and start btnap.service afterwards
+
+pi@pwnagotchi:~ $ sudo sed -i "s@REMOTE_DEV=\"\"@REMOTE_DEV=\"$PWNTETHER\"@g" /etc/btnap.conf
+
+pi@pwnagotchi:~ $ cat <<- EOFF > /home/pi/bluetooth-pair.sh
+> #!/usr/bin/expect -f
+>
+> set prompt "#"
+> set address [lindex \$argv 0]
+>
+> spawn bluetoothctl
+> expect -re \$prompt
+> send "remove \$address\r"
+> sleep 1
+> expect -re \$prompt
+> send "scan on\r"
+> send_user "\nSleeping\r"
+> sleep 10
+> send_user "\nDone sleeping\r"
+> send "scan off\r"
+> expect "Controller"
+> send "trust \$address\r"
+> sleep 2
+> send "pair \$address\r"
+> sleep 2
+> expect "Confirm passkey"
+> send "yes\r"
+> sleep 3
+> send_user "\nShould be paired now.\r"
+> send "quit\r"
+> expect eof
+> EOFF
+pi@pwnagotchi:~ $ chmod +x /home/pi/bluetooth-pair.sh
+
+pi@pwnagotchi:~ $ cat <<- EOFF > /home/pi/tether-restart.sh
+> #!/bin/sh
+>
+> SCRIPT=\$(readlink -f \$0)
+> SCRIPTPATH=\`dirname \$SCRIPT\`
+>
+> /sbin/ifconfig bnep0 > /dev/null 2>&1
+> status=\$?
+> if [ \$status -ne 0 ]; then
+>     echo "Connecting to bluetooth"
+>     sudo systemctl restart btnap
+> fi
+> sleep 10
+>     sudo ifconfig bnep0 192.168.44.100 netmask 255.255.255.0
+>     sudo sed -i "s@127.0.0.1@8.8.8.8@g" /etc/resolv.conf
+>     sudo route del -net 0.0.0.0 netmask 0.0.0.0 gw 10.0.0.1
+>     sudo route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.44.1
+> EOFF
+
+pi@pwnagotchi:~ $ chmod +x /home/pi/tether-restart.sh
+
+******* MAKE SURE PHONE IS IN TETHERING MODE AND IN VISIBLE/PAIRABLE AT THIS STAGE **********
+
+
+pi@pwnagotchi:~ $ sudo /home/pi/bluetooth-pair.sh $PWNTETHER
+spawn bluetoothctl
+Agent registered
+[bluetooth]# remove C0:BD:C8:D0:7B:8C
+Device C0:BD:C8:D0:7B:8C not available
+[bluetooth]#
+Sleeping
+scan oneeping
+Discovery started
+[CHG] Controller B8:27:EB:2E:6E:EF Discovering: yes
+[NEW] Device C0:BD:C8:D0:7B:8C BlackHole
+[bluetooth]# scan off
+[bluetooth]# trust C0:BD:C8:D0:7B:8C
+Discovery stopped
+[CHG] Device C0:BD:C8:D0:7B:8C Trusted: yes
+Changing C0:BD:C8:D0:7B:8C trust succeeded
+[bluetooth]# pair C0:BD:C8:D0:7B:8C
+Attempting to pair with C0:BD:C8:D0:7B:8C
+[CHG] Device C0:BD:C8:D0:7B:8C Connected: yes
+Request confirmation
+[agent] Confirm passkey 734441 (yes/no):
+yesuld be paired now.
+[CHG] Device C0:BD:C8:D0:7B:8C Modalias: bluetooth:v0075p0100d0201
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: 00001105-0000-1000-8000-00805f9b34fb
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: 0000110a-0000-1000-8000-00805f9b34fb
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: 0000110c-0000-1000-8000-00805f9b34fb
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: 0000110e-0000-1000-8000-00805f9b34fb
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: 00001112-0000-1000-8000-00805f9b34fb
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: 00001115-0000-1000-8000-00805f9b34fb
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: 00001116-0000-1000-8000-00805f9b34fb
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: 0000111f-0000-1000-8000-00805f9b34fb
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: 0000112f-0000-1000-8000-00805f9b34fb
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: 00001132-0000-1000-8000-00805f9b34fb
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: 00001200-0000-1000-8000-00805f9b34fb
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: 00001800-0000-1000-8000-00805f9b34fb
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: 00001801-0000-1000-8000-00805f9b34fb
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: 95e60810-8ad0-11e6-bdf4-4b1e122d00d0
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: a23d00bc-217c-123b-9c00-fc44577136ee
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: a49eb41e-cb06-495c-9f4f-aa80a90cdf4a
+[CHG] Device C0:BD:C8:D0:7B:8C UUIDs: a49eb41e-cb06-495c-9f4f-bb80a90cdf00
+[CHG] Device C0:BD:C8:D0:7B:8C ServicesResolved: yes
+[CHG] Device C0:BD:C8:D0:7B:8C Paired: yes
+Pairing successful
+[BlackHole]# quit
+
+pi@pwnagotchi:~ $ sudo systemctl restart btnap
+
+pi@pwnagotchi:~ $ sudo systemctl status btnap
+● btnap.service
+   Loaded: loaded (/etc/systemd/system/btnap.service; enabled; vendor preset: enabled)
+   Active: inactive (dead) since Fri 2019-10-11 20:37:17 BST; 1s ago
+  Process: 1768 ExecStart=/usr/local/sbin/btnap.service.sh (code=exited, status=0/SUCCESS)
+ Main PID: 1768 (code=exited, status=0/SUCCESS)
+
+Oct 11 20:37:15 pwnagotchi systemd[1]: Started btnap.service.
+Oct 11 20:37:17 pwnagotchi systemd[1]: btnap.service: Succeeded.
+
+pi@pwnagotchi:~ $ sudo ifconfig bnep0 192.168.44.100 netmask 255.255.255.0
+
+pi@pwnagotchi:~ $ sudo sed -i "s@127.0.0.1@8.8.8.8@g" /etc/resolv.conf
+
+pi@pwnagotchi:~ $ sudo route del -net 0.0.0.0 netmask 0.0.0.0 gw 10.0.0.1
+
+pi@pwnagotchi:~ $ sudo route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.44.1
+
+pi@pwnagotchi:~ $ sudo sed -i "s@10.0.0.2@0.0.0.0@g" /etc/pwnagotchi/default.yml
+
+pi@pwnagotchi:~ $ route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         192.168.44.1    0.0.0.0         UG    0      0        0 bnep0
+10.0.0.0        0.0.0.0         255.255.255.0   U     0      0        0 usb0
+192.168.44.0    0.0.0.0         255.255.255.0   U     0      0        0 bnep0
+
