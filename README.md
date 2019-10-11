@@ -2,6 +2,11 @@
 
 Launch the command as described in the INSTALL file.
 
+You need to change the MAC address by yours on top. 
+You can as well change the bluetooth network if you have a different one on your phone (I have 192.168.44.X and put a static ip on the RPI to make it simple). 
+You can find your address range by launching an ifconfig in your phone terminal if needed.
+Once this has been done successfully once in usb (and you can confirm tethering by pinging www.google.com and verifying that the route command is having a default route to your bluetooth and not to 10.0.0.1 anymore)
+
 You can verify the expected output on a RC2 Vanilla
 
 Generally issue are when the phone is not in tethering/visible/pairable mode.
