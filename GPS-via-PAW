@@ -1,0 +1,48 @@
+You take an android device, you start the PAW application with the bluetooth connection
+to pwnagotchi active.
+
+Site of the app I use : http://paw-android.fun2code.de
+
+Then you create the code to retrieve gps data. 
+Just create a file in the scared in the "/paw/html" folder with wathever editor (I use Mixplorer)
+
+CODE:
+
+<bsh>
+import de.fun2code.android.pawserver.AndroidInterface;
+import org.json.*;
+import android.content.Context;
+import android.location.*;
+service = server.props.get("serviceContext");
+lm = service.getSystemService(Context.LOCATION_SERVICE);
+crit = new Criteria();
+crit.setAccuracy(Criteria.ACCURACY_FINE);
+provider = lm.getBestProvider(crit, true);
+loc = lm.getLastKnownLocation(provider);
+// Network provider as fallback
+if(loc == null) {
+ provider = LocationManager.NETWORK_PROVIDER;
+ loc = lm.getLastKnownLocation(provider);
+}
+if(loc != null) {
+json = new JSONObject();
+json.put("long", loc.getLongitude());
+json.put("lat", loc.getLatitude());
+request.sendResponse(json.toString().getBytes(), "text/plain");
+request.out.flush();
+request.out.close();
+}
+else {
+}
+</bsh>
+
+
+
+And then from the pwnagotchi you can do a :
+
+pi@pwnagotchi:~/pwnagotchi$ curl http://192.168.44.1:8080/gps.xhtml
+{"long":6.1085311487654375,"lat":46.204706312387884}
+
+
+Just need to have this intergrated into a plugin and the fun begin
+
