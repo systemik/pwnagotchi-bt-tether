@@ -27,7 +27,7 @@ And then add this:
 
 ```* * * * * /home/pi/tether-restart.sh```
 
-Finally you can enable the ui on all ips by adding this to **/etc/pwnagotchi/config.xml**:
+Ui is enabled on all ips by adding this (already part of the INSTALL) to **/etc/pwnagotchi/config.xml**:
 
 ---
 
