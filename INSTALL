@@ -57,26 +57,6 @@ sleep 10
 EOFF
 chmod +x /home/pi/tether-restart.sh
 
-sudo cat <<- EOFF >> /etc/pwnagotchi/config.yml
-ui:
-    # ePaper display can update every 3 secs anyway, set to 0 to only refresh for major data changes
-    # IMPORTANT: The lifespan of an eINK display depends on the cumulative amount of refreshes. If you want to
-    # preserve your display over time, you should set this value to 0.0 so that the display will be refreshed only
-    # if any of the important data fields changed (the uptime and blinking cursor won't trigger a refresh).
-    fps: 0.0
-    display:
-        enabled: true
-        rotation: 180
-        # Possible options inkyphat/inky, papirus/papi, waveshare_1/ws_1 or waveshare_2/ws_2
-        type: 'waveshare_2'
-        # Possible options red/yellow/black (black used for monocromatic displays)
-        color: 'black'
-        video:
-            enabled: true
-            address: '0.0.0.0'
-            port: 8080
-EOFF
-
 sudo /home/pi/bluetooth-pair.sh $PWNTETHER
 sudo systemctl restart btnap
 sleep 10
