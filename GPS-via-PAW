@@ -15,8 +15,8 @@ Systemik (the original author) used Mixplorer and that seems to work well. Any o
 Copy and paste everything from <bsh> to </bsh> down below and paste it into the file 
 (You might need to name it gps.txt first, paste and save the code, and then rename it back to gps.xhtml)
 
-(Code with no timestamps can be found here https://raw.githubusercontent.com/systemik/pwnagotchi-bt-tether/master/GPS-via-PAW)
-(Warning, the old code wont work with webgpsmap plugin ^^)
+======================================================================================
+======================================================================================
 (Start copying from under this text, so from line 22 to the end)
 
 <bsh>
