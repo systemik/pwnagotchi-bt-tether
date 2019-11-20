@@ -1,48 +1,61 @@
-You take an android device, you start the PAW application with the bluetooth connection
-to pwnagotchi active.
+======================================================================================
+@Shaynemk and @Arttumiro on the pwnagotchi boards added timestamps, altitude, and satellites to former code
+======================================================================================
+This is just the android part of the whole guide but the rest can be found here https://community.pwnagotchi.ai/t/setting-up-paw-gps-on-android
+======================================================================================
+======================================================================================
 
-Site of the app I use : http://paw-android.fun2code.de
+Site of the app I use : http://paw-android.fun2code.de (It needs a lot of permissions but it will not do anything automatically)
+Dont worry about incompatibility warnings, the gps code should still work even with that.
+Downloading the app and pressing the button to start it should be all you need to do on the app itself.
 
-Then you create the code to retrieve gps data. 
-Just create a file in the scared in the "/paw/html" folder with wathever editor (I use Mixplorer)
+Then you create the file to allow the pwnagotchi to retrieve gps data. 
+Create a file in the internal storage /paw/html folder on your phone called gps.xhtml
+Systemik (the original author) used Mixplorer and that seems to work well. Any other file file explorer should still work.
+Copy and paste everything from <bsh> to </bsh> down below and paste it into the file 
+(You might need to name it gps.txt first, paste and save the code, and then rename it back to gps.xhtml)
 
-CODE:
+(Code with no timestamps can be found here https://raw.githubusercontent.com/systemik/pwnagotchi-bt-tether/master/GPS-via-PAW)
+(Warning, the old code wont work with webgpsmap plugin ^^)
+(Start copying from under this text, so from line 22 to the end)
 
 <bsh>
 import de.fun2code.android.pawserver.AndroidInterface;
 import org.json.*;
 import android.content.Context;
 import android.location.*;
+import java.text.SimpleDateFormat;
+
 service = server.props.get("serviceContext");
 lm = service.getSystemService(Context.LOCATION_SERVICE);
 crit = new Criteria();
 crit.setAccuracy(Criteria.ACCURACY_FINE);
 provider = lm.getBestProvider(crit, true);
 loc = lm.getLastKnownLocation(provider);
+
+// gps.py output matching variables
+updated = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSZ");
+
 // Network provider as fallback
-if(loc == null) {
- provider = LocationManager.NETWORK_PROVIDER;
- loc = lm.getLastKnownLocation(provider);
-}
-if(loc != null) {
-json = new JSONObject();
-json.put("long", loc.getLongitude());
-json.put("lat", loc.getLatitude());
-request.sendResponse(json.toString().getBytes(), "text/plain");
-request.out.flush();
-request.out.close();
-}
-else {
-}
+if (loc == null) {
+    provider = LocationManager.NETWORK_PROVIDER;
+    loc = lm.getLastKnownLocation(provider);
+} else if (loc != null) {
+    json = new JSONObject();
+    json.put("Updated", updated.format(loc.getTime()));
+    json.put("Latitude", loc.getLatitude());
+    json.put("Longitude", loc.getLongitude());
+    json.put("NumSatellites", loc.getExtras().getInt("satellites")); //could be 0 if using NETWORK_PROVIDER or phone isnt implementing it.
+    json.put("Altitude", loc.hasAltitude()?loc.getAltitude():0);
+    
+    request.sendResponse(json.toString().getBytes(), "text/plain");
+    request.out.flush();
+    request.out.close();
+} else {}
 </bsh>
 
-
-
-And then from the pwnagotchi you can do a :
+To test, from the pwnagotchi you can do a :
 
 pi@pwnagotchi:~/pwnagotchi$ curl http://192.168.44.1:8080/gps.xhtml
-{"long":6.1085311487654375,"lat":46.204706312387884}
 
-
-Just need to have this intergrated into a plugin and the fun begin
 
